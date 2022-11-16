@@ -1,7 +1,7 @@
 # Лабораторная работа 1
 ### Вариант 7 : [SqueezeNet](https://arxiv.org/abs/1602.07360) и [AmsGrad](https://arxiv.org/abs/1904.09237v1)
 ***
-Архитектура SqueezeNet
+#### Архитектура SqueezeNet
 ![SqueezeNet.png](SqueezeNet.png)
 ***
 Тестирование производится на датасете [CarDatasets](https://drive.google.com/drive/folders/1pkudEBabqbXMxRTgfGQs3e0VqfTjtqWU) 
