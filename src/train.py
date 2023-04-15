@@ -33,7 +33,7 @@ class KNNModel():
         self.X_test = sc.transform(self.X_test)
         self.project_path = os.path.join(os.getcwd(), "experiments")
         self.knn_path = os.path.join(self.project_path, "knn.sav")
-        self.log.info("MultiModel is ready")
+        self.log.info("KNNModel is ready")
 
     def knn(self, use_config: bool, n_neighbors=3, metric="minkowski", p=2, predict=False) -> bool:
         if use_config:

@@ -11,7 +11,7 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 
 
-class TestMultiModel(unittest.TestCase):
+class TestKNNModel(unittest.TestCase):
 
     def setUp(self) -> None:
         self.multi_model = KNNModel()
