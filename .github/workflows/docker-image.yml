@@ -1,0 +1,39 @@
+name: Docker Image CI
+
+env:
+    TAG : egorba/getting-started:$(date +%s)
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  CI_pipline:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag TAG
+      
+    - uses: actions/checkout@v3
+    - name: Push the Docker image
+      run: docker build . --file Dockerfile --tag TAG
+      
+  
+  CD_pipline:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker Compose
+      run: docker-compose build
+      
+    - uses: actions/checkout@v3
+    - name: Run the Docker Compose
+      run: docker-compose up
