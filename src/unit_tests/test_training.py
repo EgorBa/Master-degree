@@ -2,9 +2,10 @@ import configparser
 import os
 import unittest
 import sys
-from src.train import KNNModel
 
 sys.path.insert(1, os.path.join(os.getcwd(), "src"))
+
+from train import KNNModel
 
 config = configparser.ConfigParser()
 config.read("config.ini")

@@ -2,10 +2,11 @@ import configparser
 import os
 import unittest
 import pandas as pd
-from src.preprocess import DataMaker
 import sys
 
 sys.path.insert(1, os.path.join(os.getcwd(), "src"))
+
+from preprocess import DataMaker
 
 config = configparser.ConfigParser()
 config.read("config.ini")
