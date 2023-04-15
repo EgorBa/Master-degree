@@ -11,7 +11,7 @@ on:
 
 jobs:
 
-  CI_pipline:
+  Pipline:
 
     runs-on: ubuntu-latest
 
@@ -22,14 +22,8 @@ jobs:
       
     - uses: actions/checkout@v3
     - name: Push the Docker image
-      run: docker build . --file Dockerfile --tag $TAG
+      run: docker push $TAG
       
-  
-  CD_pipline:
-    
-    runs-on: ubuntu-latest
-
-    steps:
     - uses: actions/checkout@v3
     - name: Build the Docker Compose
       run: docker-compose build
@@ -37,3 +31,4 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run the Docker Compose
       run: docker-compose up
+    
