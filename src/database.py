@@ -6,7 +6,7 @@ import dotenv
 
 from logger import Logger
 
-dotenv.load_dotenv()
+dotenv.load_dotenv(os.getenv('GITHUB_ENV'))
 
 SHOW_LOG = True
 TAG = "Database"
