@@ -2,12 +2,6 @@ name: Docker CI/CD Pipelines
 
 env:
     TAG : "egorba/getting-started:latest"
-    DATABASE_NAME: ${{secrets.DATABASE_NAME}}
-    DATABASE_COLUMN: "dat"
-    DATABASE_USER: "osmvcnou"
-    DATABASE_PASSWORD: "rdFDPWZpoW2RrvLno9qEDwVMhruzEZ-S"
-    DATABASE_HOST: "lallah.db.elephantsql.com"
-    DATABASE_N: "osmvcnou"
 
 on:
   push:
@@ -40,6 +34,11 @@ jobs:
       run: |
           touch .env
           echo DATABASE_NAME="${{ secrets.DATABASE_NAME }}" >> .env
+          echo DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}" >> .env
+          echo DATABASE_USER="${{ secrets.DATABASE_USER }}" >> .env
+          echo DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}" >> .env
+          echo DATABASE_HOST="${{ secrets.DATABASE_HOST }}" >> .env
+          echo DATABASE_N="${{ secrets.DATABASE_N }}" >> .env
           docker-compose build
       
     - uses: actions/checkout@v3
@@ -47,5 +46,10 @@ jobs:
       run: |
           touch .env
           echo DATABASE_NAME="${{ secrets.DATABASE_NAME }}" >> .env
+          echo DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}" >> .env
+          echo DATABASE_USER="${{ secrets.DATABASE_USER }}" >> .env
+          echo DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}" >> .env
+          echo DATABASE_HOST="${{ secrets.DATABASE_HOST }}" >> .env
+          echo DATABASE_N="${{ secrets.DATABASE_N }}" >> .env
           docker-compose up
     
