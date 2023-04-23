@@ -6,7 +6,7 @@ import dotenv
 
 from logger import Logger
 
-dotenv.load_dotenv(".env")
+dotenv.load_dotenv()
 
 SHOW_LOG = True
 TAG = "Database"
