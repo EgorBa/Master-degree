@@ -3,11 +3,11 @@ from logger import Logger
 
 
 def create_database():
-    conn = psycopg2.connect(dbname="postgres", user="postgres", password="12345678", host="127.0.0.1")
+    conn = psycopg2.connect(dbname="neondb", user="EgorBa", password="TzsFvo7Qi4Uc", host="ep-falling-morning-557748.us-east-2.aws.neon.tech")
     cursor = conn.cursor()
 
     conn.autocommit = True
-    sql = "CREATE DATABASE initdata"
+    sql = "CREATE TABLE IF NOT EXISTS penguins  (dat varchar)"
 
     cursor.execute(sql)
     logger = Logger(True)
