@@ -10,7 +10,7 @@ dotenv.load_dotenv()
 
 SHOW_LOG = True
 TAG = "Database"
-DATABASE_NAME = os.getenv("DATABASE_NAME")
+DATABASE_NAME = os.environ["DATABASE_NAME"]
 DATABASE_COLUMN = os.getenv("DATABASE_COLUMN")
 DATABASE_USER = os.getenv("DATABASE_USER")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
