@@ -5,6 +5,5 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 ADD . /app
-RUN apt-get install postgresql
-RUN apt-get update -y && apt-get install -y gcc
+RUN apt-get update -y && apt-get install -y libpq-dev gcc
 RUN pip install -r requirements.txt
