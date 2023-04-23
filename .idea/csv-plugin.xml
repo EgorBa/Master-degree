@@ -3,14 +3,7 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/archive/penguins_lter.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/archive/penguins_size.csv">
+        <entry key="/data/Test_penguins_y.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -31,28 +24,14 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/data/Test_penguins_X.csv">
+        <entry key="/data/penguins_X.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/data/Test_penguins_y.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/data/penguins_X.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/data/penguins_y.csv">
+        <entry key="/data/penguins_size.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

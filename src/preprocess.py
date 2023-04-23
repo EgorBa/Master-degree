@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import sys
 import traceback
 
+from database import create_database
 from logger import Logger
 
 TEST_SIZE = 0.2
@@ -27,6 +28,7 @@ class DataMaker():
         self.test_path = [os.path.join(self.project_path, "Test_penguins_X.csv"), os.path.join(
             self.project_path, "Test_penguins_y.csv")]
         self.log.info("DataMaker is ready")
+        create_database()
 
     def get_data(self) -> bool:
         dataset = pd.read_csv(self.data_path)
