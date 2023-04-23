@@ -23,7 +23,7 @@ class DataBase:
 
     def create_database(self):
         conn = psycopg2.connect(dbname="neondb", user="EgorBa", password="TzsFvo7Qi4Uc",
-                                host="ep-falling-morning-557748.us-east-2.aws.neon.tech")
+                                host="ep-falling-morning-557748.us-east-2.aws.neon.tech", sslmode="require")
         cursor = conn.cursor()
 
         conn.autocommit = True
