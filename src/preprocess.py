@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import sys
 import traceback
 
-from database import create_database
+from database import DataBase
 from logger import Logger
 
 TEST_SIZE = 0.2
@@ -20,7 +20,7 @@ class DataMaker():
         self.config = configparser.ConfigParser()
         self.log = logger.get_logger(__name__)
         self.project_path = os.path.join(os.getcwd(), "data")
-        self.data_path = os.path.join(self.project_path, "penguins_size.csv")
+        self.db = DataBase()
         self.X_path = os.path.join(self.project_path, "penguins_X.csv")
         self.y_path = os.path.join(self.project_path, "penguins_y.csv")
         self.train_path = [os.path.join(self.project_path, "Train_penguins_X.csv"), os.path.join(
@@ -28,10 +28,9 @@ class DataMaker():
         self.test_path = [os.path.join(self.project_path, "Test_penguins_X.csv"), os.path.join(
             self.project_path, "Test_penguins_y.csv")]
         self.log.info("DataMaker is ready")
-        create_database()
 
     def get_data(self) -> bool:
-        dataset = pd.read_csv(self.data_path)
+        dataset = self.db.get_data_as_dataframe()
         dataset["sex"] = dataset["sex"].replace(np.nan, "NO_GENDER").replace('.', "NO_GENDER")
         dataset = dataset.replace(np.nan, 0)
         dataset = pd.get_dummies(dataset, columns=['sex', 'island'])
