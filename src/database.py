@@ -2,17 +2,20 @@ import psycopg2
 import os
 import pandas as pd
 from pandas import DataFrame
+import dotenv
 
 from logger import Logger
 
-DATABASE_NAME = "penguins"
-DATABASE_COLUMN = "dat"
-TAG = "Database"
+dotenv.load_dotenv(".env")
+
 SHOW_LOG = True
-DATABASE_USER = "osmvcnou"
-DATABASE_PASSWORD = "rdFDPWZpoW2RrvLno9qEDwVMhruzEZ-S"
-DATABASE_HOST = "lallah.db.elephantsql.com"
-DATABASE_N = "osmvcnou"
+TAG = "Database"
+DATABASE_NAME = os.getenv("DATABASE_NAME")
+DATABASE_COLUMN = os.getenv("DATABASE_COLUMN")
+DATABASE_USER = os.getenv("DATABASE_USER")
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
+DATABASE_HOST = os.getenv("DATABASE_HOST")
+DATABASE_N = os.getenv("DATABASE_N")
 
 
 class DataBase:
