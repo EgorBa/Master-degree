@@ -29,6 +29,8 @@ class DataBase:
         self.add_data_from_path()
 
     def create_database(self):
+        self.log.info(f"table \"{DATABASE_NAME}\" creating start")
+
         conn = psycopg2.connect(dbname=DATABASE_N, user=DATABASE_USER, password=DATABASE_PASSWORD, host=DATABASE_HOST)
         cursor = conn.cursor()
 
