@@ -9,6 +9,10 @@ DATABASE_NAME = "penguins"
 DATABASE_COLUMN = "dat"
 TAG = "Database"
 SHOW_LOG = True
+DATABASE_USER = "osmvcnou"
+DATABASE_PASSWORD = "rdFDPWZpoW2RrvLno9qEDwVMhruzEZ-S"
+DATABASE_HOST = "lallah.db.elephantsql.com"
+DATABASE_N = "osmvcnou"
 
 
 class DataBase:
@@ -22,8 +26,7 @@ class DataBase:
         self.add_data_from_path()
 
     def create_database(self):
-        conn = psycopg2.connect(dbname="neondb", user="EgorBa", password="TzsFvo7Qi4Uc",
-                                host="ep-falling-morning-557748.us-east-2.aws.neon.tech", sslmode="require")
+        conn = psycopg2.connect(dbname=DATABASE_N, user=DATABASE_USER, password=DATABASE_PASSWORD, host=DATABASE_HOST)
         cursor = conn.cursor()
 
         conn.autocommit = True
@@ -52,8 +55,7 @@ class DataBase:
         self.add_lines(all_data)
 
     def add_line(self, line):
-        conn = psycopg2.connect(dbname="neondb", user="EgorBa", password="TzsFvo7Qi4Uc",
-                                host="ep-falling-morning-557748.us-east-2.aws.neon.tech")
+        conn = psycopg2.connect(dbname=DATABASE_N, user=DATABASE_USER, password=DATABASE_PASSWORD, host=DATABASE_HOST)
         cursor = conn.cursor()
 
         conn.autocommit = True
@@ -68,8 +70,7 @@ class DataBase:
         conn.close()
 
     def add_lines(self, lines):
-        conn = psycopg2.connect(dbname="neondb", user="EgorBa", password="TzsFvo7Qi4Uc",
-                                host="ep-falling-morning-557748.us-east-2.aws.neon.tech")
+        conn = psycopg2.connect(dbname=DATABASE_N, user=DATABASE_USER, password=DATABASE_PASSWORD, host=DATABASE_HOST)
         cursor = conn.cursor()
 
         conn.autocommit = True
@@ -87,8 +88,7 @@ class DataBase:
         conn.close()
 
     def get_data_as_dataframe(self) -> DataFrame:
-        conn = psycopg2.connect(dbname="neondb", user="EgorBa", password="TzsFvo7Qi4Uc",
-                                host="ep-falling-morning-557748.us-east-2.aws.neon.tech")
+        conn = psycopg2.connect(dbname=DATABASE_N, user=DATABASE_USER, password=DATABASE_PASSWORD, host=DATABASE_HOST)
         cursor = conn.cursor()
 
         conn.autocommit = True
