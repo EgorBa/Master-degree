@@ -2,12 +2,12 @@ name: Docker CI/CD Pipelines
 
 env:
     TAG : "egorba/getting-started:latest"
-    DATABASE_NAME: "penguins"
-    DATABASE_COLUMN: "dat"
-    DATABASE_USER: "osmvcnou"
-    DATABASE_PASSWORD: "rdFDPWZpoW2RrvLno9qEDwVMhruzEZ-S"
-    DATABASE_HOST: "lallah.db.elephantsql.com"
-    DATABASE_N: "osmvcnou"
+    DATABASE_NAME : "penguins"
+    DATABASE_COLUMN : "dat"
+    DATABASE_USER : "osmvcnou"
+    DATABASE_PASSWORD : "rdFDPWZpoW2RrvLno9qEDwVMhruzEZ-S"
+    DATABASE_HOST : "lallah.db.elephantsql.com"
+    DATABASE_N : "osmvcnou"
 
 on:
   push:
