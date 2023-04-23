@@ -24,7 +24,7 @@ jobs:
     steps:
     
     - name: Test env vars for python
-      run: DATABASE_NAME=${{secrets.DATABASE_NAME}} python -c 'import os;print(os.environ['DATABASE_NAME'])
+      run: echo $DATABASE_NAME
     
     - uses: actions/checkout@v3
     - name: Login to DockerHub
