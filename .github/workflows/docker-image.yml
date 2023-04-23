@@ -31,8 +31,22 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker Compose
       run: docker-compose build
+      env:
+            DATABASE_NAME : "penguins"
+            DATABASE_COLUMN : "dat"
+            DATABASE_USER : "osmvcnou"
+            DATABASE_PASSWORD : "rdFDPWZpoW2RrvLno9qEDwVMhruzEZ-S"
+            DATABASE_HOST : "lallah.db.elephantsql.com"
+            DATABASE_N : "osmvcnou"
       
     - uses: actions/checkout@v3
     - name: Run the Docker Compose
       run: docker-compose up
+      env:
+            DATABASE_NAME : "penguins"
+            DATABASE_COLUMN : "dat"
+            DATABASE_USER : "osmvcnou"
+            DATABASE_PASSWORD : "rdFDPWZpoW2RrvLno9qEDwVMhruzEZ-S"
+            DATABASE_HOST : "lallah.db.elephantsql.com"
+            DATABASE_N : "osmvcnou"
     
