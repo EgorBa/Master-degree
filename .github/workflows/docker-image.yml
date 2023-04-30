@@ -22,6 +22,8 @@ jobs:
       run: |
           docker run --rm --detach --name vault -p 8200:8200 -e 'VAULT_DEV_ROOT_TOKEN_ID=devtoken' -e 'SKIP_SETCAP=1' vault
           pip install vault-cli
+          apt-get update && apt-get install gpg
+          vault
           export VAULT_CLI_TOKEN=devtoken
           vault-cli set secret/metadata/database DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
           vault-cli set secret/metadata/database DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}"
