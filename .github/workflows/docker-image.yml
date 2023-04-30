@@ -18,17 +18,17 @@ jobs:
     steps:
 
     - uses: actions/checkout@v3
-    - name: Vault
+    - name: Init vault
       run: |
           docker run --rm --detach --name vault -p 8200:8200 -e 'VAULT_DEV_ROOT_TOKEN_ID=devtoken' -e 'SKIP_SETCAP=1' vault
           pip install vault-cli
           export VAULT_CLI_TOKEN=devtoken
-          vault-cli set DATABASE DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
-          vault-cli set DATABASE DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}"
-          vault-cli set DATABASE DATABASE_USER="${{ secrets.DATABASE_USER }}"
-          vault-cli set DATABASE DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}"
-          vault-cli set DATABASE DATABASE_HOST="${{ secrets.DATABASE_HOST }}"
-          vault-cli set DATABASE DATABASE_N="${{ secrets.DATABASE_N }}"
+          vault-cli set secret/metadata/database DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
+          vault-cli set secret/metadata/database DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}"
+          vault-cli set secret/metadata/database DATABASE_USER="${{ secrets.DATABASE_USER }}"
+          vault-cli set secret/metadata/database DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}"
+          vault-cli set secret/metadata/database DATABASE_HOST="${{ secrets.DATABASE_HOST }}"
+          vault-cli set secret/metadata/database DATABASE_N="${{ secrets.DATABASE_N }}"
 
     - uses: actions/checkout@v3
     - name: Login to DockerHub
@@ -46,12 +46,12 @@ jobs:
     - name: Build the Docker Compose
       run: |
           touch .env
-          echo DATABASE_NAME=$(vault-cli set DATABASE DATABASE_NAME) >> .env
-          echo DATABASE_COLUMN=$(vault-cli set DATABASE DATABASE_COLUMN) >> .env
-          echo DATABASE_USER=$(vault-cli set DATABASE DATABASE_USER) >> .env
-          echo DATABASE_PASSWORD=$(vault-cli set DATABASE DATABASE_PASSWORD) >> .env
-          echo DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> .env
-          echo DATABASE_N=$(vault-cli set DATABASE DATABASE_N) >> .env
+          echo DATABASE_NAME=$(vault-cli get secret/metadata/database DATABASE_NAME) >> .env
+          echo DATABASE_COLUMN=$(vault-cli get secret/metadata/database DATABASE_COLUMN) >> .env
+          echo DATABASE_USER=$(vault-cli get secret/metadata/database DATABASE_USER) >> .env
+          echo DATABASE_PASSWORD=$(vault-cli get secret/metadata/database DATABASE_PASSWORD) >> .env
+          echo DATABASE_HOST=$(vault-cli get secret/metadata/database DATABASE_HOST) >> .env
+          echo DATABASE_N=$(vault-cli get secret/metadata/database DATABASE_N) >> .env
           docker-compose build
       
     - uses: actions/checkout@v3
