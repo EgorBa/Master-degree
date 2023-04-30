@@ -61,6 +61,11 @@ class KNNModel():
                   'path': self.knn_path}
         return self.save_model(classifier, self.knn_path, "KNN", params)
 
+    def predict(self, X, y) -> float:
+        loaded_model = pickle.load(open(self.knn_path, 'rb'))
+        y_pred = loaded_model.predict(X)
+        return accuracy_score(y, y_pred)
+
     def save_model(self, classifier, path: str, name: str, params: dict) -> bool:
         self.config[name] = params
         os.remove('config.ini')
