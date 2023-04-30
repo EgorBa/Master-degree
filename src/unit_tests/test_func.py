@@ -20,8 +20,8 @@ class TestKNNModel(unittest.TestCase):
 
     def test_knn(self):
         project_path = os.path.join(os.getcwd(), "data")
-        X = pd.read_csv(os.path.join(project_path, 'data/Func_test_penguins_X.csv'))
-        y = pd.read_csv(os.path.join(project_path, 'data/Func_test_penguins_y.csv'))
+        X = pd.read_csv(os.path.join(project_path, 'Func_test_penguins_X.csv'))
+        y = pd.read_csv(os.path.join(project_path, 'Func_test_penguins_y.csv'))
         self.assertLess('0.95', self.knn_model.predict(X, y))
 
 
