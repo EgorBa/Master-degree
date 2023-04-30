@@ -2,6 +2,7 @@ name: Docker CI/CD Pipelines
 
 env:
     TAG : "egorba/getting-started:latest"
+    VAULT_CLI_TOKEN : "devtoken"
 
 on:
   push:
@@ -23,8 +24,6 @@ jobs:
           docker run --rm --detach --name vault -p 8200:8200 -e 'VAULT_DEV_ROOT_TOKEN_ID=devtoken' -e 'SKIP_SETCAP=1' vault
           pip install vault-cli
           apt-get update && apt-get install gpg
-          vault
-          export VAULT_CLI_TOKEN=devtoken
           vault-cli set secret/metadata/database DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
           vault-cli set secret/metadata/database DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}"
           vault-cli set secret/metadata/database DATABASE_USER="${{ secrets.DATABASE_USER }}"
