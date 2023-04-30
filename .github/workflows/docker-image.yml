@@ -23,7 +23,6 @@ jobs:
       run: |
           docker run --rm --detach --name vault -p 8200:8200 -e 'VAULT_DEV_ROOT_TOKEN_ID=devtoken' -e 'SKIP_SETCAP=1' vault
           pip install vault-cli
-          apt-get update && apt-get install gpg
           vault-cli set secret/metadata/database DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
           vault-cli set secret/metadata/database DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}"
           vault-cli set secret/metadata/database DATABASE_USER="${{ secrets.DATABASE_USER }}"
@@ -57,5 +56,12 @@ jobs:
       
     - uses: actions/checkout@v3
     - name: Run the Docker Compose
-      run: docker-compose up
+      run: |
+          echo DATABASE_NAME="${{ secrets.DATABASE_NAME }}" >> .env
+          echo DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}" >> .env
+          echo DATABASE_USER="${{ secrets.DATABASE_USER }}" >> .env
+          echo DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}" >> .env
+          echo DATABASE_HOST="${{ secrets.DATABASE_HOST }}" >> .env
+          echo DATABASE_N="${{ secrets.DATABASE_N }}" >> .env
+          docker-compose up
     
