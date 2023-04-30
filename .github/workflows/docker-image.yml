@@ -21,8 +21,6 @@ jobs:
     - uses: actions/checkout@v3
     - name: Init vault
       run: |
-          apt-get update && apt-get install vault
-          vault status
           docker run --rm --detach --name vault -p 8200:8200 -e 'VAULT_DEV_ROOT_TOKEN_ID=devtoken' -e 'SKIP_SETCAP=1' vault
           pip install vault-cli
           vault-cli set secret/metadata/database DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
