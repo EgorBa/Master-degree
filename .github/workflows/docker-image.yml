@@ -57,7 +57,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run the Docker Compose
       run: |
-          > .env
+          rm .env
+          touch .env
           echo DATABASE_NAME="${{ secrets.DATABASE_NAME }}" >> .env
           echo DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}" >> .env
           echo DATABASE_USER="${{ secrets.DATABASE_USER }}" >> .env
