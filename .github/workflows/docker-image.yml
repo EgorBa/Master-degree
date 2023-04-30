@@ -46,12 +46,12 @@ jobs:
     - name: Build the Docker Compose
       run: |
           touch .env
-          echo DATABASE_NAME=$(vault-cli get secret/metadata/database DATABASE_NAME) >> .env
-          echo DATABASE_COLUMN=$(vault-cli get secret/metadata/database DATABASE_COLUMN) >> .env
-          echo DATABASE_USER=$(vault-cli get secret/metadata/database DATABASE_USER) >> .env
-          echo DATABASE_PASSWORD=$(vault-cli get secret/metadata/database DATABASE_PASSWORD) >> .env
-          echo DATABASE_HOST=$(vault-cli get secret/metadata/database DATABASE_HOST) >> .env
-          echo DATABASE_N=$(vault-cli get secret/metadata/database DATABASE_N) >> .env
+          echo DATABASE_NAME=\"$(vault-cli get secret/metadata/database DATABASE_NAME)\" >> .env
+          echo DATABASE_COLUMN=\"$(vault-cli get secret/metadata/database DATABASE_COLUMN)\" >> .env
+          echo DATABASE_USER=\"$(vault-cli get secret/metadata/database DATABASE_USER)\" >> .env
+          echo DATABASE_PASSWORD=\"$(vault-cli get secret/metadata/database DATABASE_PASSWORD)\" >> .env
+          echo DATABASE_HOST=\"$(vault-cli get secret/metadata/database DATABASE_HOST)\" >> .env
+          echo DATABASE_N=\"$(vault-cli get secret/metadata/database DATABASE_N)\" >> .env
           docker-compose build
       
     - uses: actions/checkout@v3
