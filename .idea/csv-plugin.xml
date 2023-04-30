@@ -59,6 +59,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/src/data/Func_test_penguins_X.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/data/Func_test_penguins_y.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/src/data/penguins_X.csv">
           <value>
             <Attribute>

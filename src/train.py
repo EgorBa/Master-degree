@@ -28,9 +28,9 @@ class KNNModel():
             self.config["SPLIT_DATA"]["X_test"], index_col=0)
         self.y_test = pd.read_csv(
             self.config["SPLIT_DATA"]["y_test"], index_col=0)
-        sc = StandardScaler()
-        self.X_train = sc.fit_transform(self.X_train)
-        self.X_test = sc.transform(self.X_test)
+        self.sc = StandardScaler()
+        self.X_train = self.sc.fit_transform(self.X_train)
+        self.X_test = self.sc.transform(self.X_test)
         self.project_path = os.path.join(os.getcwd(), "experiments")
         self.knn_path = os.path.join(self.project_path, "knn.sav")
         self.log.info("KNNModel is ready")
@@ -63,7 +63,7 @@ class KNNModel():
 
     def predict(self, X, y) -> float:
         loaded_model = pickle.load(open(self.knn_path, 'rb'))
-        y_pred = loaded_model.predict(X)
+        y_pred = loaded_model.predict(self.sc.transform(X))
         return accuracy_score(y, y_pred)
 
     def save_model(self, classifier, path: str, name: str, params: dict) -> bool:
