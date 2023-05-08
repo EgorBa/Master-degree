@@ -16,7 +16,7 @@ class Consumer:
         self.log = logger.get_logger(__name__)
         self.consumer = KafkaConsumer(
             TOPIC,
-            bootstrap_servers=['localhost:9092'],
+            bootstrap_servers=['localhost:29092'],
             auto_offset_reset='earliest',
             enable_auto_commit=True,
             group_id='my-group',
@@ -30,6 +30,7 @@ class Consumer:
             self.log.info(f"Kafka get message = {message}")
             count_lines = int(message.value["count_lines"])
             self.data = self.data[:min(count_lines, self.max_size)]
+            return
 
     def get_data(self):
         while len(self.data) == 0:
