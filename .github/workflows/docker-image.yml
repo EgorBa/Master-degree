@@ -35,12 +35,6 @@ jobs:
       run: docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
 
     - uses: actions/checkout@v3
-    - name: Create Zookeeper and Kafka
-      run: |
-          kafka_2.12-3.4.0/bin/zookeeper-server-start.sh config/zookeeper.properties
-          kafka_2.12-3.4.0/bin/kafka-server-start.sh config/server.properties
-
-    - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag $TAG
       
