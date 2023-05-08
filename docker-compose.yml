@@ -28,5 +28,6 @@ services:
     ports:
       - 8000:8000
     image: egorba/getting-started:latest
+    restart: on-failure
     depends_on:
       - kafka
