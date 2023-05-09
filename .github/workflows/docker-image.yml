@@ -1,7 +1,7 @@
 name: Docker CI/CD Pipelines
 
 env:
-    TAG : "egorba/getting-started:latest"
+    TAG : "egorba/getting-started:1"
     VAULT_CLI_TOKEN : "devtoken"
 
 on:

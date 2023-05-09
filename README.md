@@ -23,3 +23,12 @@
 В качестве хранилища был выбран Hashicorp Vault (vault-cli)
 
 Вся работа с секретами находится [тут](.github/workflows/docker-image.yml)
+
+Vault находится в stateless состоянии, так как все секреты хранятся в github secrets.
+
+## Лабораторная работа #4 (Интеграция Apache Kafka сервиса)
+В рамках данной работы были реализованы Kafka Producer и Kafka Consumer,  а также была произведена интеграйия их в проект.
+
+Реализация Kafka Producer [тут](src/kafka_producer.py)
+
+Реализация Kafka Consumer [тут](src/kafka_consumer.py)
