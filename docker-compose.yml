@@ -1,45 +1,10 @@
 version: '3.9'
 
-networks:
-  app-tier:
-    driver: bridge
-
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    networks:
-      - app-tier
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 22181:2181
-
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    depends_on:
-      - zookeeper
-    ports:
-      - 29092:29092
-    restart: on-failure
-    networks:
-      - app-tier
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   web:
     build: .
     command: bash -c "python src/preprocess.py && python src/train.py && coverage run src/unit_tests/test_preprocess.py && coverage run -a src/unit_tests/test_training.py && coverage run -a src/unit_tests/test_func.py && coverage report -m"
     ports:
       - 8000:8000
-    networks:
-      - app-tier
     image: egorba/getting-started:latest
-    restart: on-failure
-    depends_on:
-      - kafka
