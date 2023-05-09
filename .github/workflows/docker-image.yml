@@ -27,8 +27,6 @@ jobs:
 
       kafka:
         image: confluentinc/cp-kafka:latest
-        depends_on:
-          - zookeeper
         ports:
           - 29092:29092
         restart: on-failure
