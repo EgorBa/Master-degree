@@ -6,23 +6,21 @@ from sklearn.model_selection import train_test_split
 import sys
 import traceback
 
-from kafka_consumer import Consumer
-from kafka_producer import Producer
+from database import DataBase
 from logger import Logger
 
 TEST_SIZE = 0.2
 SHOW_LOG = True
 
 
-class DataMaker:
+class DataMaker():
 
     def __init__(self) -> None:
         logger = Logger(SHOW_LOG)
         self.config = configparser.ConfigParser()
         self.log = logger.get_logger(__name__)
         self.project_path = os.path.join(os.getcwd(), "data")
-        self.kafka_producer = Producer()
-        self.kafka_consumer = Consumer()
+        self.db = DataBase()
         self.X_path = os.path.join(self.project_path, "penguins_X.csv")
         self.y_path = os.path.join(self.project_path, "penguins_y.csv")
         self.train_path = [os.path.join(self.project_path, "Train_penguins_X.csv"), os.path.join(
@@ -32,9 +30,7 @@ class DataMaker:
         self.log.info("DataMaker is ready")
 
     def get_data(self) -> bool:
-        self.kafka_producer.update_data(1000)
-        self.kafka_consumer.observe_data()
-        dataset = self.kafka_consumer.get_data()
+        dataset = self.db.get_data_as_dataframe()
         dataset["sex"] = dataset["sex"] \
             .replace(np.nan, "NO_GENDER") \
             .replace('.', "NO_GENDER") \
