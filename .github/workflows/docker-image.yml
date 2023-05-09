@@ -85,5 +85,6 @@ jobs:
           echo DATABASE_PASSWORD=\"$(vault-cli get secret/metadata/database DATABASE_PASSWORD)\" >> .env
           echo DATABASE_HOST=\"$(vault-cli get secret/metadata/database DATABASE_HOST)\" >> .env
           echo DATABASE_N=\"$(vault-cli get secret/metadata/database DATABASE_N)\" >> .env
+          docker ps
           docker-compose up
     
