@@ -19,7 +19,7 @@ jobs:
     services:
       zookeeper:
         image: confluentinc/cp-zookeeper:latest
-        environment:
+        env:
           ZOOKEEPER_CLIENT_PORT: 2181
           ZOOKEEPER_TICK_TIME: 2000
         ports:
@@ -32,7 +32,7 @@ jobs:
         ports:
           - 29092:29092
         restart: on-failure
-        environment:
+        env:
           KAFKA_BROKER_ID: 1
           KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
           KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
