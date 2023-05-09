@@ -16,7 +16,7 @@ class Consumer:
         self.log = logger.get_logger(__name__)
         self.consumer = KafkaConsumer(
             TOPIC,
-            bootstrap_servers=['localhost:29092'],
+            bootstrap_servers=['localhost:9092'],
             auto_offset_reset='earliest',
             enable_auto_commit=True,
             group_id='my-group',

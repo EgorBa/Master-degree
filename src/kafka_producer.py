@@ -12,7 +12,7 @@ class Producer:
     def __init__(self) -> None:
         logger = Logger(SHOW_LOG)
         self.log = logger.get_logger(__name__)
-        self.producer = KafkaProducer(bootstrap_servers=['localhost:29092'],
+        self.producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                                       value_serializer=lambda x: dumps(x).encode('utf-8'))
         self.log.info(f"Kafka producer was created")
 
