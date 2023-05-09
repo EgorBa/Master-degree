@@ -7,4 +7,4 @@ services:
     command: bash -c "python src/preprocess.py && python src/train.py && coverage run src/unit_tests/test_preprocess.py && coverage run -a src/unit_tests/test_training.py && coverage run -a src/unit_tests/test_func.py && coverage report -m"
     ports:
       - 8000:8000
-    image: egorba/getting-started:late
+    image: egorba/getting-started:1
