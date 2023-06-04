@@ -10,7 +10,7 @@ from utils import get_model_name_by_quantization_level
 
 
 def decode_image_and_save(encode_file):
-    path_to_decode_image = "test.png"
+    path_to_decode_image = "file.png"
     d = DataStorage(encode_file)
     encoded_data = d.read_from_file()
     decode_image(path_to_decode_image, encoded_data)

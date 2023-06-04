@@ -49,4 +49,4 @@ def encode_image(path_to_image, path_to_model, quantization_level):
     return encoded_str, h.codes
 
 
-encode_image_and_save(path_to_image="images/lena.png", quantization_level=5)
+encode_image_and_save(path_to_image="images/pappers.png", quantization_level=10)
