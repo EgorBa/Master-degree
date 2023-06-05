@@ -8,10 +8,9 @@ import os
 os.environ["PYARROW_IGNORE_TIMEZONE"] = "1"
 
 spark = SparkSession.builder \
-    .config("spark.executor.memory", "70g") \
-    .config("spark.driver.memory", "50g") \
-    .config("spark.memory.offHeap.enabled", "true") \
-    .config("spark.memory.offHeap.size", "16g") \
+    .config("spark.executor.memory", "8g") \
+    .config("spark.driver.memory", "8g") \
+    .config("spark.memory.offHeap.size", "4g") \
     .getOrCreate()
 
 # Read and prepare dataset
