@@ -1,2 +1,1 @@
-# Master-degree
-Master's degree courses
+# Reinforcement learning
