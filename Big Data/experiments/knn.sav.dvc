@@ -1,0 +1,4 @@
+outs:
+- md5: fa45d43f3a05b23cae389dc9282eb63c
+  size: 30486
+  path: knn.sav

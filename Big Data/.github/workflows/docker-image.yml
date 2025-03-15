@@ -1,0 +1,90 @@
+name: Docker CI/CD Pipelines
+
+env:
+    TAG : "egorba/getting-started:latest"
+    VAULT_CLI_TOKEN : "devtoken"
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  Pipline:
+
+    runs-on: ubuntu-latest
+
+    services:
+      zookeeper:
+        image: bitnami/zookeeper:latest
+        env:
+          ZOOKEEPER_CLIENT_PORT: 2181
+          ZOOKEEPER_TICK_TIME: 2000
+        ports:
+          - 22181:2181
+
+      kafka:
+        image: bitnami/kafka:latest
+        ports:
+          - 29092:29092
+        env:
+          KAFKA_BROKER_ID: 1
+          ALLOW_PLAINTEXT_LISTENER: yes
+          KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+          KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+          KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+          KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+    steps:
+
+    - uses: actions/checkout@v3
+    - name: Init vault
+      run: |
+          docker run --rm --detach --name vault -p 8200:8200 -e 'VAULT_DEV_ROOT_TOKEN_ID=devtoken' -e 'SKIP_SETCAP=1' vault
+          pip install vault-cli
+          vault-cli set secret/metadata/database DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
+          vault-cli set secret/metadata/database DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}"
+          vault-cli set secret/metadata/database DATABASE_USER="${{ secrets.DATABASE_USER }}"
+          vault-cli set secret/metadata/database DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}"
+          vault-cli set secret/metadata/database DATABASE_HOST="${{ secrets.DATABASE_HOST }}"
+          vault-cli set secret/metadata/database DATABASE_N="${{ secrets.DATABASE_N }}"
+
+    - uses: actions/checkout@v3
+    - name: Login to DockerHub
+      run: docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
+
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag $TAG
+      
+    - uses: actions/checkout@v3
+    - name: Push the Docker image
+      run: docker push $TAG
+      
+    - uses: actions/checkout@v3
+    - name: Build the Docker Compose
+      run: |
+          touch .env
+          echo DATABASE_NAME="${{ secrets.DATABASE_NAME }}" >> .env
+          echo DATABASE_COLUMN="${{ secrets.DATABASE_COLUMN }}" >> .env
+          echo DATABASE_USER="${{ secrets.DATABASE_USER }}" >> .env
+          echo DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}" >> .env
+          echo DATABASE_HOST="${{ secrets.DATABASE_HOST }}" >> .env
+          echo DATABASE_N="${{ secrets.DATABASE_N }}" >> .env
+          docker-compose build
+      
+    - uses: actions/checkout@v3
+    - name: Run the Docker Compose
+      run: |
+          echo DATABASE_NAME=\"$(vault-cli get secret/metadata/database DATABASE_NAME)\" >> .env
+          echo DATABASE_COLUMN=\"$(vault-cli get secret/metadata/database DATABASE_COLUMN)\" >> .env
+          echo DATABASE_USER=\"$(vault-cli get secret/metadata/database DATABASE_USER)\" >> .env
+          echo DATABASE_PASSWORD=\"$(vault-cli get secret/metadata/database DATABASE_PASSWORD)\" >> .env
+          echo DATABASE_HOST=\"$(vault-cli get secret/metadata/database DATABASE_HOST)\" >> .env
+          echo DATABASE_N=\"$(vault-cli get secret/metadata/database DATABASE_N)\" >> .env
+          docker ps
+          docker-compose up
+    
