@@ -1,1 +1,2 @@
-# AutoML course
+# AutoML
+AutoML course
