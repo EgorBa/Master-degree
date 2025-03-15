@@ -1,0 +1,3 @@
+HEIGHT = 512
+WIDTH = 512
+DIM = 64
